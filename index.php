@@ -18,6 +18,23 @@ $connection->close();
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 $rowsLength = count($rows);
 $containsRows = $rowsLength > 0;
+
+$desistirUrl = "./desistirhabito.php";
+$vencerUrl = "./vencerhabito.php";
+$novohabitoUrl = "./novohabito.php";
+
+function getDesistirUrl($id)
+{
+    global $desistirUrl;
+    return $desistirUrl . "?id=" . $id;
+}
+
+function getVencerUrl($id)
+{
+    global $vencerUrl;
+    return $vencerUrl . "?id=" . $id;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -48,19 +65,19 @@ $containsRows = $rowsLength > 0;
                         $nome = $props["nome"];
                     ?>
                         <tr>
-                            <th scope="row"  style="width: 5%; text-align: center;">
+                            <th scope="row" style="width: 5%; text-align: center;">
                                 <?= $arrayIndex ?>
                             </th>
                             <td>
                                 <?= $nome ?>
                             </td>
                             <td style="width: 10%;">
-                                <a class="btn btn-outline-secondary" href="desistirhabito.php?id=<?= $id ?>">
+                                <a class="btn btn-outline-secondary" href="<?= getDesistirUrl($id) ?>">
                                     Desistir
                                 </a>
                             </td>
                             <td style="width: 10%;">
-                                <a class="btn btn-outline-success" href="vencerhabito.php?id=<?= $id ?>">
+                                <a class="btn btn-outline-success" href="<?= getVencerUrl($id) ?>">
                                     Vencer
                                 </a>
                             </td>
@@ -70,20 +87,21 @@ $containsRows = $rowsLength > 0;
                     ?>
                 </tbody>
             </table>
-            <p>Continue mudando sua vida!</p>
-            <p>Cadastre mais hábitos!</p>
+            <p class="text-secondary text-bg-light position-fixed bottom-0 start-0 m-0 p-1 zindex-dropdown w-100" style="text-align: center;">
+                Mude sua vida! Cadastre mais hábitos!
+            </p>
         <?php
         } else {
         ?>
             <div class="alert alert-secondary" role="alert">
                 <p>Você não possui hábitos cadastrados!</p>
-                <p>Começe já a <a href="novohabito.php" class="alert-link">mudar</a> sua vida!</p>
+                <p class="m-0">Começe já a <a href="<?= $novohabitoUrl ?>" class="alert-link">mudar</a> sua vida!</p>
             </div>
         <?php
         }
         ?>
-        <p class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="novohabito.php" class="btn btn-primary ">Cadastrar novo hábito</a>
+        <p class="d-grid gap-2 d-md-flex justify-content-md-end mt">
+            <a href="<?= $novohabitoUrl ?>" class="btn btn-primary ">Cadastrar novo hábito</a>
         </p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
