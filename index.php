@@ -39,7 +39,7 @@ $containsRows = $rowsLength > 0;
         if ($containsRows) {
         ?>
             <br />
-            <table class="table table-striped pb-5">
+            <table class="table align-middle table-striped pb-5">
                 <tbody>
                     <?php
                     for ($arrayIndex = 0; $arrayIndex < $rowsLength; $arrayIndex++) {
@@ -48,10 +48,22 @@ $containsRows = $rowsLength > 0;
                         $nome = $props["nome"];
                     ?>
                         <tr>
-                            <th scope="row"><?= $arrayIndex ?></th>
-                            <td><?= $nome ?></td>
-                            <td><a href="vencerhabito.php?id=<?= $id ?>">Vencer</a></td>
-                            <td><a href="desistirhabito.php?id=<?= $id?>">Desistir</a></td>
+                            <th scope="row"  style="width: 5%; text-align: center;">
+                                <?= $arrayIndex ?>
+                            </th>
+                            <td>
+                                <?= $nome ?>
+                            </td>
+                            <td style="width: 10%;">
+                                <a class="btn btn-outline-secondary" href="desistirhabito.php?id=<?= $id ?>">
+                                    Desistir
+                                </a>
+                            </td>
+                            <td style="width: 10%;">
+                                <a class="btn btn-outline-success" href="vencerhabito.php?id=<?= $id ?>">
+                                    Vencer
+                                </a>
+                            </td>
                         </tr>
                     <?php
                     }

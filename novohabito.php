@@ -15,7 +15,8 @@
         <form id="formulario" action="inserthabito.php">
             <p><input type="text" id="nome" name="nome" autofocus placeholder="Dê um nome ao hábito" class="form-control" /></p>
             <p class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <input type="submit" value="Criar" class="btn btn-primary ">
+                <a href="./index.php" class="btn btn-secondary "> Cancelar </a>
+                <input type="submit" value="Confirmar" class="btn btn-primary ">
             </p>
         </form>
     </div>
