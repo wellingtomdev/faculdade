@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="center">
+    <div class="container pt-4">
         <h1>Novo Hábito</h1>
         <!-- Formulário para cadastro de pessoas
  Note a utilização do atributo name, que
@@ -17,8 +17,10 @@ faz
  o link entre os elementos do DOM e o
 JavaScript-->
         <form id="formulario" action="inserthabito.php">
-            <p><label>Nome: <input type="text" id="nome" name="nome" autofocus /></label></p>
-            <p><input type="submit" value="Criar"></p>
+            <p><input type="text" id="nome" name="nome" autofocus placeholder="Dê um nome ao hábito" class="form-control" /></p>
+            <p  class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <input type="submit" value="Criar" class="btn btn-primary ">
+            </p>
         </form>
     </div>
     <script type="text/javascript">

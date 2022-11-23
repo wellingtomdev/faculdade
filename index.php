@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="center">
+    <div class="container pt-4">
         <h1>Lista de hábitos</h1>
         <p>Cadastre aqui os hábitos que você tem que
             vencer para melhorar sua vida!</p>
@@ -42,18 +42,16 @@
         if ($resultado->num_rows > 0) {
         ?>
             <br />
-            <table class="center">
+            <table class="table table-striped pb-5">
                 <tbody>
                     <?php
                     // Looping pelos registros retornados
                     while ($registro = $resultado->fetch_assoc()) {
                     ?>
                         <tr>
-                            <td><?php echo $registro["nome"]; ?></ td>
-                            <td><a href="vencerhabito.php?id=<?php
-                                                                echo $registro["id"]; ?>">Vencer</a></td>
-                            <td><a href="desistirhabito.php?id=<?php
-                                                                echo $registro["id"]; ?>">Desistir</a></td>
+                            <td><?php echo $registro["nome"]; ?></td>
+                            <td><a href="vencerhabito.php?id=<?php echo $registro["id"]; ?>">Vencer</a></td>
+                            <td><a href="desistirhabito.php?id=<?php echo $registro["id"]; ?>">Desistir</a></td>
                         </tr>
                     <?php
                     } // fim do looping
@@ -65,8 +63,11 @@
         <?php
         } else {
         ?>
-            <p>Você não possui hábitos cadastrados!</p>
-            <p>Começe já a mudar sua vida!</p>
+            <div class="alert alert-secondary" role="alert">
+                <p>Você não possui hábitos cadastrados!</p>
+                <p>Começe já a <a href="novohabito.php" class="alert-link">mudar</a> sua vida!</p>
+            </div>
+
         <?php
         }
         // fim do if
@@ -74,7 +75,10 @@
         $conexao->close();
         ?>
 
-        <a href="novohabito.php">Cadastrar Hábito</a>
+
+        <p class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="novohabito.php" class="btn btn-primary ">Cadastrar novo hábito</a>
+        </p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
