@@ -1,3 +1,25 @@
+<?php
+
+$host = "localhost";
+$user = "root";
+$password = "";
+$database = "listadehabito";
+
+$connection = new mysqli($host, $user, $password, $database);
+
+if ($connection->connect_error) {
+    die("Falha na conexão: " . $connection->connect_error);
+}
+
+$queryString = "SELECT id, nome FROM habito WHERE status = 'A'";
+$result = $connection->query($queryString);
+$connection->close();
+
+$rows = $result->fetch_all(MYSQLI_ASSOC);
+$rowsLength = count($rows);
+$containsRows = $rowsLength > 0;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -12,50 +34,27 @@
 <body>
     <div class="container pt-4">
         <h1>Lista de hábitos</h1>
-        <p>Cadastre aqui os hábitos que você tem que
-            vencer para melhorar sua vida!</p>
+        <p>Cadastre aqui os hábitos que você tem que vencer para melhorar sua vida!</p>
         <?php
-        // Obtém a lista de hábitos do
-        // banco de dados MySQL
-        $servidor = "localhost";
-        $usuario = "root";
-        $senha = "";
-        $bancodedados = "listadehabito";
-        // Cria uma conexão com o banco de dados
-        $conexao = new mysqli(
-            $servidor,
-            $usuario,
-            $senha,
-            $bancodedados
-        );
-        // Verifica a conexão
-        if ($conexao->connect_error) {
-            die("Falha na conexão: " .
-                $conexao->connect_error);
-        }
-        // Executa a query da variável $sql
-        $sql = " SELECT id " .
-            " , nome " .
-            " FROM habito " .
-            " WHERE status = 'A'";
-        $resultado = $conexao->query($sql);
-        // Verifica se a query retornou registros
-        if ($resultado->num_rows > 0) {
+        if ($containsRows) {
         ?>
             <br />
             <table class="table table-striped pb-5">
                 <tbody>
                     <?php
-                    // Looping pelos registros retornados
-                    while ($registro = $resultado->fetch_assoc()) {
+                    for ($arrayIndex = 0; $arrayIndex < $rowsLength; $arrayIndex++) {
+                        $props = $rows[$arrayIndex];
+                        $id = $props["id"];
+                        $nome = $props["nome"];
                     ?>
                         <tr>
-                            <td><?php echo $registro["nome"]; ?></td>
-                            <td><a href="vencerhabito.php?id=<?php echo $registro["id"]; ?>">Vencer</a></td>
-                            <td><a href="desistirhabito.php?id=<?php echo $registro["id"]; ?>">Desistir</a></td>
+                            <th scope="row"><?= $arrayIndex ?></th>
+                            <td><?= $nome ?></td>
+                            <td><a href="vencerhabito.php?id=<?= $id ?>">Vencer</a></td>
+                            <td><a href="desistirhabito.php?id=<?= $id?>">Desistir</a></td>
                         </tr>
                     <?php
-                    } // fim do looping
+                    }
                     ?>
                 </tbody>
             </table>
@@ -68,15 +67,9 @@
                 <p>Você não possui hábitos cadastrados!</p>
                 <p>Começe já a <a href="novohabito.php" class="alert-link">mudar</a> sua vida!</p>
             </div>
-
         <?php
         }
-        // fim do if
-        // Fecha a conexão com o MySQL
-        $conexao->close();
         ?>
-
-
         <p class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="novohabito.php" class="btn btn-primary ">Cadastrar novo hábito</a>
         </p>
