@@ -66,7 +66,7 @@ function getVencerUrl($id)
                     ?>
                         <tr>
                             <th scope="row" style="width: 5%; text-align: center;">
-                                <?= $arrayIndex ?>
+                                <?= $arrayIndex + 1 ?>
                             </th>
                             <td>
                                 <?= $nome ?>
